@@ -63,7 +63,7 @@ module Wisper
         end
 
         def failure_message
-          msg = "expected publisher to broadcast #{@event} event"
+          msg = "expected publisher to broadcast '#{@event}' event"
           msg += " with args: #{@args.inspect}" if @args.size > 0
           msg << broadcast_events_list
           msg
@@ -93,7 +93,7 @@ module Wisper
 
         def broadcast_events_list
           if @event_recorder.broadcast_events.any?
-            " (actual events broadcast: #{event_names.join(', ')})"
+            "\nactual events broadcast:\n\n#{event_names.join("\n\n")}"
           else
             " (no events broadcast)"
           end

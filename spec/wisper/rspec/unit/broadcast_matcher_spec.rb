@@ -64,7 +64,8 @@ describe Wisper::RSpec::BroadcastMatcher::Matcher do
       before { matcher.matches?(block) }
 
       it 'has descriptive failure message' do
-        expect(matcher.failure_message).to eq "expected publisher to broadcast #{event_name} event (no events broadcast)"
+        expect(matcher.failure_message).
+          to eq "expected publisher to broadcast '#{event_name}' event (no events broadcast)"
       end
     end
   end
@@ -87,8 +88,8 @@ describe Wisper::RSpec::BroadcastMatcher::Matcher do
       before { matcher.matches?(block) }
 
       it 'has descriptive failure message' do
-        message = "expected publisher to broadcast it_happened event "\
-          "(actual events broadcast: event1, event2(12345, foo))"
+        message = "expected publisher to broadcast 'it_happened' event"\
+          "\nactual events broadcast:\n\nevent1\n\nevent2(12345, foo)"
         expect(matcher.failure_message).to eq(message)
       end
     end
