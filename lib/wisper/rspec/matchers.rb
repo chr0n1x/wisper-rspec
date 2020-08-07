@@ -23,10 +23,11 @@ module Wisper
         @broadcast_events << [method_name.to_s, *args]
       end
 
-      def broadcast?(event_name, *args)
+      def broadcast?(event, *args)
         expected_args = args.size > 0 ? args : [any_args]
+        event = event.to_s unless event.is_a?(SingletonMatcher)
         @broadcast_events.any? do |event_params|
-          matcher = ::RSpec::Mocks::ArgumentListMatcher.new(event_name.to_s, *expected_args)
+          matcher = ::RSpec::Mocks::ArgumentListMatcher.new(event, *expected_args)
           matcher.args_match?(*event_params)
         end
       end

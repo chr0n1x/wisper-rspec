@@ -11,6 +11,10 @@ describe 'not_broadcast matcher' do
   it 'can be chained with broadcast' do
     expect { publisher.send(:broadcast, :foobar) }.to not_broadcast(:barfoo).and broadcast(:foobar)
   end
+  
+  it 'handles anything matchers' do
+    expect { publisher }.to not_broadcast(anything)
+  end
 end
 
 describe 'not_publish matcher' do
@@ -20,6 +24,10 @@ describe 'not_publish matcher' do
   it 'can be chained with publish' do
     expect { publisher.send(:publish, :foobar) }.to not_publish(:barfoo).and publish(:foobar)
   end
+
+  it 'handles anything matchers' do
+    expect { publisher }.to not_publish(anything)
+  end
 end
 
 describe 'broadcast matcher' do
@@ -28,6 +36,10 @@ describe 'broadcast matcher' do
 
   it 'passes when publisher broadcasts inside block' do
     expect { publisher.send(:broadcast, :foobar) }.to broadcast(:foobar)
+  end
+
+  it 'handles anything matchers' do
+    expect { publisher.send(:broadcast, :foobar) }.to broadcast(anything)
   end
 
   context 'with arguments' do
